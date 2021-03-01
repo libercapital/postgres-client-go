@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 	"sync"
 )
 
@@ -22,7 +23,11 @@ var once sync.Once
 */
 func PostgreSQLConnect(dsn string) *dbclient {
 	once.Do(func() {
-		db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+		db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+			NamingStrategy: schema.NamingStrategy{
+				SingularTable: true,
+			},
+		})
 		if err != nil {
 			panic(err)
 		}

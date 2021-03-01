@@ -34,8 +34,7 @@ func PostgreSQLConnect(dsn string) *dbclient {
 
 		instance = &dbclient{db}
 
-		fmt.Print(CONNECTED)
-		fmt.Println(dsn)
+		fmt.Println(CONNECTED)
 	})
 
 	return instance

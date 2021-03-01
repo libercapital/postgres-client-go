@@ -1,3 +1,3 @@
-# db-client
+# Potgresql-Client
 
-All kind of Data Base client as golang module
+Singleton in PostgreSQL Connection Client

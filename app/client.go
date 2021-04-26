@@ -6,7 +6,6 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"gorm.io/gorm/schema"
 )
 
 const CONNECTED = "Successfully connected to database"
@@ -22,14 +21,16 @@ var dbError error = nil
 /*
 	@param dsn Data source name
 	example: dsn := "host=localhost user=gorm password=gorm dbname=gorm port=9920 sslmode=disable TimeZone=Asia/Shanghai"
-*/
-func Connect(dsn string) (*dbclient, error) {
-	once.Do(func() {
-		db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+	@param config Gorm Configs
+	example: &gorm.Config{
 			NamingStrategy: schema.NamingStrategy{
 				SingularTable: true,
 			},
-		})
+		}
+*/
+func Connect(dsn string, config gorm.Config) (*dbclient, error) {
+	once.Do(func() {
+		db, err := gorm.Open(postgres.Open(dsn), &config)
 
 		if err != nil {
 			dbError = err

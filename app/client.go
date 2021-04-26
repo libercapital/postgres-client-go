@@ -2,10 +2,11 @@ package postgresql_client
 
 import (
 	"fmt"
+	"sync"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"sync"
 )
 
 const CONNECTED = "Successfully connected to database"
@@ -14,28 +15,30 @@ type dbclient struct {
 	DB *gorm.DB
 }
 
-var instance *dbclient
+var instance *dbclient = nil
 var once sync.Once
+var dbError error = nil
 
 /*
 	@param dsn Data source name
 	example: dsn := "host=localhost user=gorm password=gorm dbname=gorm port=9920 sslmode=disable TimeZone=Asia/Shanghai"
 */
-func Connect(dsn string) *dbclient {
+func Connect(dsn string) (*dbclient, error) {
 	once.Do(func() {
 		db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 			NamingStrategy: schema.NamingStrategy{
 				SingularTable: true,
 			},
 		})
+
 		if err != nil {
-			panic(err)
+			dbError = err
+			return
 		}
 
 		instance = &dbclient{db}
-
 		fmt.Println(CONNECTED)
 	})
 
-	return instance
+	return instance, dbError
 }

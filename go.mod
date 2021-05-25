@@ -1,4 +1,4 @@
-module gitlab.com/icredit/bava/architecture/software/libs/go-modules/postgresql-client.git
+module gitlab.com/bavatech/architecture/software/libs/go-modules/postgresql-client.git
 
 go 1.15
 

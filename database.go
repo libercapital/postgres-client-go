@@ -31,7 +31,7 @@ func (p *postgresClientImpl) Connect() error {
 	}
 
 	if p.config.NamingStrategy != nil {
-		gormConfig.NamingStrategy = *p.config.NamingStrategy
+		gormConfig.NamingStrategy = p.config.NamingStrategy
 	}
 
 	sqltrace.Register("postgres", &pq.Driver{})

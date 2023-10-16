@@ -14,7 +14,7 @@ type Config struct {
 	Database       string
 	ServiceName    string
 	SSLMode        string
-	NamingStrategy *schema.Namer
+	NamingStrategy schema.Namer
 }
 
 func (c Config) string() string {

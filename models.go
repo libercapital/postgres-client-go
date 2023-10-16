@@ -1,15 +1,20 @@
 package postgresql_client
 
-import "fmt"
+import (
+	"fmt"
+
+	"gorm.io/gorm/schema"
+)
 
 type Config struct {
-	Host        string
-	Port        string
-	User        string
-	Password    string
-	Database    string
-	ServiceName string
-	SSLMode     string
+	Host           string
+	Port           string
+	User           string
+	Password       string
+	Database       string
+	ServiceName    string
+	SSLMode        string
+	NamingStrategy *schema.Namer
 }
 
 func (c Config) string() string {

@@ -30,6 +30,10 @@ func (p *postgresClientImpl) Connect() error {
 		SkipDefaultTransaction: true,
 	}
 
+	if p.config.NamingStrategy != nil {
+		gormConfig.NamingStrategy = *p.config.NamingStrategy
+	}
+
 	sqltrace.Register("postgres", &pq.Driver{})
 
 	tracedb, err := sqltrace.Open("postgres", p.config.string(), sqltrace.WithServiceName(p.config.ServiceName))

@@ -1,6 +1,6 @@
 module gitlab.com/bavatech/architecture/software/libs/go-modules/postgresql-client.git
 
-go 1.19
+go 1.21.3
 
 require (
 	github.com/golang-migrate/migrate/v4 v4.15.2

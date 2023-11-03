@@ -1,0 +1,13 @@
+image: node:latest
+
+stages:
+  - release
+
+create_tag:
+  stage: release
+  before_script:
+    - npm install -g semantic-release @semantic-release/gitlab
+  script:
+    - semantic-release
+  only:
+    - main

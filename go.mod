@@ -1,4 +1,4 @@
-module gitlab.com/bavatech/architecture/software/libs/go-modules/postgresql-client.git
+module github.com/libercapital/postgres-client-go
 
 go 1.22
 
